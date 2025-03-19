@@ -4,7 +4,6 @@ import Quill from 'quill';
 import "quill/dist/quill.snow.css";
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { alertFn, iconsEnum } from "../Alerts";
-import { BACKEND_URL } from "../config";
 import { BlogTypes } from "@sunglah_npm/medium-blog";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Components/Spinner";
@@ -16,12 +15,12 @@ const Publish = () => {
         content: "",
         published: true
     })
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
     async function postBlog(e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post(`${BACKEND_URL}/api/v1/blog`,
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog`,
                 postBlogState
                 , {
                     headers: {

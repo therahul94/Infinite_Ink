@@ -10,12 +10,10 @@ const Blogs = () => {
     const { loading, blogs } = useBlogs();
 
     return (
-        // className="flex flex-col h-screen 
         <div className="flex flex-col h-screen">
             <Appbar />
             <div className="flex justify-center overflow-y-auto overflow-x-hidden  ">
                 <div className="max-w-2xl min-w-xs md:min-w-xl">
-                    {/* <SkeletonsList /> */}
                     {loading ? <SkeletonsList /> : 
                         blogs.map((blogdata) =>
                             <Link to={`/blog/${blogdata.id}`} key={blogdata.id}>

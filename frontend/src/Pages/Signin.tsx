@@ -5,7 +5,6 @@ import { SigninTypes } from '@sunglah_npm/medium-blog'
 import InputCompo from '../Components/InputCompo'
 import AuthButton from '../Components/AuthButton'
 import axios from 'axios'
-import { BACKEND_URL } from '../config'
 import { useNavigate } from 'react-router-dom'
 import { alertFn, iconsEnum } from '../Alerts'
 import LoadingButton from '../Components/LoadingButton'
@@ -26,7 +25,7 @@ const Signin = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            const res = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, PostInput);
+            const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signin`, PostInput);
             setLoading(false);
             const token = res.data.token;
             if(!token) {

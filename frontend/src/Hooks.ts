@@ -17,7 +17,7 @@ export function useBlogs() {
     useEffect(() => {
         async function getBlogs() {
             try {
-                const response = await axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/bulk`, {
                     headers: {
                         Authorization: localStorage.getItem("token")
                     }
@@ -25,6 +25,7 @@ export function useBlogs() {
                 setBlogs(response.data.blogs);
                 setLoading(false);
             } catch (error) {
+                setLoading(true);
                 console.log(error);
                 return;
             }
@@ -50,7 +51,7 @@ export function useBlog({ id }: { id: string }) {
     useEffect(() => {
         async function getSpecificBlog() {
             try {
-                const response = await axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/${id}`, {
                     headers: {
                         Authorization: localStorage.getItem("token")
                     }
