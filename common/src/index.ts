@@ -8,7 +8,7 @@ export const signupSchema = z.object({
     password: z.string({
         invalid_type_error: "Password should be a string!",
         required_error: "Password is a necessary field!"
-    }),
+    }).min(5, {message: "password must be atleast 5 character long!"}),
     name: z.string({ invalid_type_error: "Password should be a string!" }).optional()
 });
 
@@ -20,18 +20,18 @@ export const signinSchema = z.object({
     password: z.string({
         invalid_type_error: "Password should be a string!",
         required_error: "Password is a necessary field!"
-    }),
+    }).min(5, {message: "password must be atleast 5 character long!"}),
 });
 
 export const createblogSchema = z.object({
     title: z.string({
         invalid_type_error: "Title should be a string!",
         required_error: "Title is a necessary field!"
-    }),
+    }).min(1, {message: "Title is required field"}),
     content: z.string({
         invalid_type_error: "Content should be a string!",
         required_error: "Content is a necessary field!"
-    }),
+    }).min(1, {message: "Content is necessary"}),
     published: z.boolean({
         invalid_type_error: "Published should be of type boolean!",
     }).default(false)

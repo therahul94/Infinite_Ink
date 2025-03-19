@@ -107,8 +107,8 @@ blog.post('/', async (c) => {
 
     try {
         const body = await c.req.json();
-        const {success} = createblogSchema.safeParse(body);
-        if(!success) {
+        const parsedData = createblogSchema.safeParse(body);
+        if(!parsedData.success) {
             c.status(411);
             return c.json({message: "Inputs are invalid"});
         }
@@ -162,7 +162,18 @@ blog.get('/bulk', async (c) => {
     try {
         // should implement the pagination, if you are getting the data in bulk then make sure you are taking it in chunks.
         // const {skip, take} = c.req.query();
-        const bulkdata = await prisma.blog.findMany({})
+        const bulkdata = await prisma.blog.findMany({
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                } 
+            }
+        })
         return c.json({ blogs: bulkdata });
     } catch (e) {
         console.log(e);
@@ -180,6 +191,16 @@ blog.get('/:id', async (c) => {
         const blog = await prisma.blog.findFirst({
             where: {
                 id: id
+            },
+            select: {
+                id: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                },
+                title: true,
+                content: true
             }
         });
         return c.json({ blog });

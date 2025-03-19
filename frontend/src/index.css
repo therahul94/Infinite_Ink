@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+.editor {
+    border-radius: 8px;
+}
+.editor .ql-toolbar.ql-snow {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.editor .ql-container.ql-snow {
+    border-radius: 8px;
+}
+
+.editor .ql-editor {
+    height: 45vh;
+}
