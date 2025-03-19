@@ -28,7 +28,7 @@ const Blogs = () => {
     )
 }
 
-function SkeletonsList() {
+export function SkeletonsList() {
     let sample = [1, 2, 3, 4, 5, 6, 7, 8];
     return <div className="">
         {sample.map(() =>
