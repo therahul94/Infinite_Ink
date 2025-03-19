@@ -8,9 +8,11 @@ import axios from 'axios'
 import { BACKEND_URL } from '../config'
 import { useNavigate } from 'react-router-dom'
 import { alertFn, iconsEnum } from '../Alerts'
+import LoadingButton from '../Components/LoadingButton'
 
 const Signin = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState<boolean>(false);
     const [PostInput, setPostInput] = useState<SigninTypes>({
         email: "",
         password: ""
@@ -23,7 +25,9 @@ const Signin = () => {
     const signinuser = async(e: MouseEvent<HTMLButtonElement>)=>{
         e.preventDefault();
         try {
+            setLoading(true);
             const res = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, PostInput);
+            setLoading(false);
             const token = res.data.token;
             if(!token) {
                 alertFn({title: "Signin error",text: "Please try again!", icon: iconsEnum.error, footer: ""})
@@ -32,11 +36,12 @@ const Signin = () => {
             alertFn({title: "Signin successful",text: "", icon: iconsEnum.success, footer: ""})
             navigate("/blogs");
         }catch(e: any) {
+            setLoading(false);
             alertFn({title: "Signin error",text: e.response.data.error, icon: iconsEnum.error, footer: ""})
             return ;
         }
     }
-
+ 
     return (
         <div>
             <div className='grid grid-cols-1 lg:grid-cols-2'>
@@ -55,7 +60,8 @@ const Signin = () => {
                             </div>
                         </div>
                         <div className='text-center mt-5'>
-                            <AuthButton buttonVal='Sign in' onClick={signinuser}/>
+                        {loading ? <LoadingButton label='Sign in'/> :
+                            <AuthButton buttonVal='Sign in' onClick={signinuser}/>}
                         </div>
                     </div>
                 </div>

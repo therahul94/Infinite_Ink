@@ -12,7 +12,7 @@ export interface BlogInterface {
 }
 
 export function useBlogs() {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const [blogs, setBlogs] = useState<BlogInterface[]>([]);
     useEffect(() => {
         async function getBlogs() {
@@ -38,7 +38,7 @@ export function useBlogs() {
 }
 
 export function useBlog({ id }: { id: string }) {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const [blogDetails, setBlogDetails] = useState<BlogInterface>({
         id: "",
         author: {
