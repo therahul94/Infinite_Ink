@@ -69,7 +69,7 @@ const Signup = () => {
                         </div>
                     </div>
                 </div>
-                <div className='invisible lg:visible'>
+                <div className='hidden lg:block'>
                     <Quotes />
                 </div>
             </div>

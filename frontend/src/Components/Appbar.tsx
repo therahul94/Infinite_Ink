@@ -3,7 +3,7 @@ import { Avatar } from "./Avatar"
 
 const Appbar = ({ publishpage }: { publishpage?: boolean }) => {
     return (
-        <div className=" w-full h-8 md:h-12 py-7 md:py-8  bg-white border-b-2 border-b-gray-300 flex flex-col justify-center">
+        <div className=" w-full h-8 md:h-12 py-7 md:py-8  bg-white border-b border-b-gray-300 flex flex-col justify-center">
             <div className="px-3 md:px-7 grid grid-cols-2">
                 <Link to="/blogs" className="text-lg md:text-2xl font-bold flex flex-col justify-center font-serif">Infinite Ink</Link>
                 <div className="flex justify-end items-center">
