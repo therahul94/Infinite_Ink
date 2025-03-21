@@ -1,17 +1,16 @@
 # 🖋️ Infinite Ink – Blog Website
 
-A full-stack blog platform built with the **MERN stack**, featuring **JWT authentication**, **rich-text editing (Quill Editor)**, and **CRUD operations** for seamless content management. The backend is deployed on **Cloudflare Workers**, and the frontend on **Vercel**, ensuring a **fast, serverless experience**. Includes a **shared npm package** with **Zod schemas** for type safety across frontend and backend.
+A **full-stack** blog platform, featuring **JWT authentication**, **rich-text editing (Quill Editor)**, and **CRUD operations** for seamless content management. The backend is deployed on **Cloudflare Workers**, and the frontend on **Vercel**, ensuring a **fast, serverless experience**. Includes a **shared npm package** with **Zod schemas** for type safety across frontend and backend.
 
 ## 📑 Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
+- [Performance Optimizations](#-performance-optimizations)
 - [Installation](#-installation)
+- [Database Setup](#-database-setup)
 - [Usage](#-usage)
-- [Screenshots](#-screenshots)
-- [Deployment](#-deployment)
-- [Contributing](#-contributing)
-- [License](#-license)
+
 
 ## ✨ Features
 
@@ -23,6 +22,9 @@ A full-stack blog platform built with the **MERN stack**, featuring **JWT authen
 ✅ **Zod validation schemas** in a shared npm package for type safety  
 ✅ **Optimized state management** using custom React hooks  
 ✅ **SEO-friendly URLs** for better search engine visibility  
+✅ **PostgreSQL with Prisma ORM** for structured and scalable data storage  
+✅ **Connection pooling via Prisma Accelerate** for efficient database access in a **serverless environment**  
+
 
 ## 🛠 Tech Stack
 
@@ -34,18 +36,28 @@ A full-stack blog platform built with the **MERN stack**, featuring **JWT authen
 
 ### 🖥️ Backend
 - Node.js
-- Express.js
+- Hono Framework
 - Cloudflare Workers
 - Zod for validation
 - JWT Authentication
+- **PostgreSQL with Prisma Accelerate for connection pooling**
 
 ### 🗄️ Database
-- PostgreSQL (with Prisma ORM)
+- **PostgreSQL** (with Prisma ORM & Prisma Accelerate)
 
 ### 🛠 DevOps & Deployment
 - Vercel (Frontend)
 - Cloudflare Workers (Backend)
-- PostgreSQL (Database)
+- **Prisma Accelerate** for database connection pooling
+
+
+## ⚡ Performance Optimizations
+
+- **Prisma Accelerate** enabled for **connection pooling**, reducing query latency and ensuring **efficient PostgreSQL connections** in a **serverless setup**.  
+- **Optimized Prisma queries** to improve read/write efficiency.  
+- **Lazy loading and memoization** to reduce frontend rendering times.  
+
+
 
 ## 🔧 Installation
 
@@ -54,7 +66,18 @@ Clone the repository:
 ```sh
 git clone https://github.com/yourusername/infinite-ink.git
 cd infinite-ink
+```
 
+## 🗄️ Database Setup
+
+1. Set up **PostgreSQL** (local or cloud-based like Supabase, Railway, or AWS RDS).
+2. Configure **Prisma ORM**:
+   
+   ```sh
+    npx prisma init
+    DATABASE_URL="prisma://your-prisma-accelerate-url"
+    npx prisma migrate dev --name init
+    ```
 ### Run Backend locally
 cd backend
 npm install
